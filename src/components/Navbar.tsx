@@ -1,7 +1,6 @@
 import React from 'react';
 import { UserRole, StudentProfile } from '../types';
-import { GraduationCap, BookOpen, ShieldAlert, Volume2, VolumeX, Flame, LogOut, Sparkles, UserCheck } from 'lucide-react';
-import { isSpeechEnabled, setSpeechEnabled } from '../utils/audio';
+import { GraduationCap, BookOpen, ShieldAlert, Flame, LogOut, Sparkles, UserCheck } from 'lucide-react';
 import { StudentAvatar } from './StudentAvatar';
 
 interface NavbarProps {
@@ -9,8 +8,6 @@ interface NavbarProps {
   onRoleChange: (role: UserRole) => void;
   student: StudentProfile | null;
   onLogoutStudent: () => void;
-  audioEnabled: boolean;
-  onToggleAudio: () => void;
   activeExerciseTitle?: string;
   activeTimerFormatted?: string;
   isTabFocused?: boolean;
@@ -21,8 +18,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onRoleChange,
   student,
   onLogoutStudent,
-  audioEnabled,
-  onToggleAudio,
   activeExerciseTitle,
   activeTimerFormatted,
   isTabFocused = true,
@@ -70,22 +65,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Controls */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Audio Toggle */}
-            <button
-              onClick={onToggleAudio}
-              className={`p-2 rounded-xl text-xs font-black border-2 border-black transition-all cursor-pointer ${
-                audioEnabled
-                  ? 'bg-[#FFCC00] text-black shadow-[2px_2px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5'
-                  : 'bg-slate-100 text-slate-600 shadow-[2px_2px_0px_#000] hover:bg-slate-200'
-              }`}
-              title={audioEnabled ? 'Audio / Pronunciation Enabled' : 'Audio Disabled'}
-            >
-              <div className="flex items-center gap-1.5">
-                {audioEnabled ? <Volume2 className="w-4 h-4 text-black" /> : <VolumeX className="w-4 h-4" />}
-                <span className="hidden sm:inline text-xs">{audioEnabled ? 'Voz activada' : 'Mute'}</span>
-              </div>
-            </button>
-
             {/* Role Switcher Pill */}
             <div className="flex items-center p-1 bg-[#FAF9F6] rounded-xl border-2 border-black shadow-[2px_2px_0px_#000]">
               <button

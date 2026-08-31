@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Question, AIFeedbackResponse } from '../types';
-import { CheckCircle2, XCircle, Volume2, Sparkles, ArrowRight, BookOpen, Clock, Lightbulb } from 'lucide-react';
-import { speakSpanish } from '../utils/audio';
+import { CheckCircle2, XCircle, Sparkles, ArrowRight, BookOpen, Clock, Lightbulb } from 'lucide-react';
 
 interface FeedbackDrawerProps {
   question: Question;
@@ -22,14 +21,6 @@ export const FeedbackDrawer: React.FC<FeedbackDrawerProps> = ({
 }) => {
   const [aiFeedback, setAiFeedback] = useState<AIFeedbackResponse | null>(null);
   const [isLoadingAI, setIsLoadingAI] = useState(false);
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-
-  const handlePlayCorrectAudio = async () => {
-    setIsPlayingAudio(true);
-    const textToSpeak = question.audioText || question.correctAnswer || question.spanishSentence || question.prompt;
-    await speakSpanish(textToSpeak, 0.85);
-    setIsPlayingAudio(false);
-  };
 
   const handleFetchAIFeedback = async () => {
     try {
@@ -120,15 +111,6 @@ export const FeedbackDrawer: React.FC<FeedbackDrawerProps> = ({
               <BookOpen className="w-4 h-4 text-[#007AFF]" />
               Explicación Gramatical:
             </span>
-
-            <button
-              onClick={handlePlayCorrectAudio}
-              disabled={isPlayingAudio}
-              className="text-xs font-black uppercase tracking-tight px-3 py-1 rounded-xl bg-[#FFCC00] text-black border-2 border-black shadow-[2px_2px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center gap-1 cursor-pointer transition-all"
-            >
-              <Volume2 className={`w-3.5 h-3.5 ${isPlayingAudio ? 'animate-bounce' : ''}`} />
-              <span>Pronunciar</span>
-            </button>
           </div>
 
           <p className="text-slate-800 font-medium leading-relaxed text-xs sm:text-sm">

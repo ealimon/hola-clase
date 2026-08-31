@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Question } from '../types';
 import { SpanishAccentsBar } from './SpanishAccentsBar';
-import { Volume2, Sparkles, RefreshCw, HelpCircle, Check, Play, Lightbulb } from 'lucide-react';
-import { speakSpanish, playSoundEffect } from '../utils/audio';
+import { Sparkles, RefreshCw, HelpCircle, Check, Play, Lightbulb } from 'lucide-react';
+import { playSoundEffect } from '../utils/audio';
 
 interface QuestionCardProps {
   question: Question;
@@ -23,8 +23,6 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   onPasteDetected,
   disabled = false,
 }) => {
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-  const [audioSpeed, setAudioSpeed] = useState<number>(0.9);
   const [showHint, setShowHint] = useState(false);
   const [scrambleSelected, setScrambleSelected] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
@@ -40,14 +38,6 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
     }
     setShowHint(false);
   }, [question.id, question.type]);
-
-  const handlePlayAudio = async (text?: string) => {
-    const speechText = text || question.audioText || question.contextSentence || question.spanishSentence || question.prompt;
-    if (!speechText) return;
-    setIsPlayingAudio(true);
-    await speakSpanish(speechText, audioSpeed);
-    setIsPlayingAudio(false);
-  };
 
   const handleInsertChar = (char: string) => {
     if (disabled) return;
@@ -119,30 +109,6 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
               <Lightbulb className="w-3.5 h-3.5 text-black" />
               <span>{showHint ? 'Ocultar Pista' : 'Pista / Hint'}</span>
             </button>
-          )}
-
-          {(question.audioText || question.contextSentence || question.spanishSentence) && (
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => handlePlayAudio()}
-                disabled={isPlayingAudio}
-                className="text-xs font-black uppercase tracking-tight px-3 py-1 rounded-xl bg-[#FAF9F6] text-black border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#FFCC00] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center gap-1.5 cursor-pointer disabled:opacity-60 transition-all"
-                title="Escuchar pronunciación en español"
-              >
-                <Volume2 className={`w-4 h-4 text-black ${isPlayingAudio ? 'animate-bounce' : ''}`} />
-                <span>{isPlayingAudio ? 'Reproduciendo...' : 'Audio'}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setAudioSpeed(audioSpeed === 0.9 ? 0.75 : 0.9)}
-                className="text-[10px] font-mono font-black px-2 py-1 rounded-lg bg-white text-black border-2 border-black shadow-[1px_1px_0px_#000]"
-                title="Cambiar velocidad de audio"
-              >
-                {audioSpeed}x
-              </button>
-            </div>
           )}
         </div>
       </div>

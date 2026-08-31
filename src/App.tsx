@@ -8,7 +8,6 @@ import { StudentExerciseHub } from './components/StudentExerciseHub';
 import { ExerciseSession } from './components/ExerciseSession';
 import { CompletionSummary } from './components/CompletionSummary';
 import { TeacherDashboard } from './components/TeacherDashboard';
-import { setSpeechEnabled, isSpeechEnabled } from './utils/audio';
 
 export default function App() {
   const [currentRole, setCurrentRole] = useState<UserRole>('student');
@@ -18,7 +17,6 @@ export default function App() {
   const [completedExerciseIds, setCompletedExerciseIds] = useState<string[]>(['ex-ser-estar']);
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>(INITIAL_SUBMISSIONS);
   const [customExercises, setCustomExercises] = useState<Exercise[]>([]);
-  const [audioEnabled, setAudioEnabled] = useState<boolean>(true);
 
   // Load submissions from server
   const fetchSubmissions = async () => {
@@ -62,12 +60,6 @@ export default function App() {
     fetchSubmissions();
     fetchCustomExercises();
   }, []);
-
-  const handleToggleAudio = () => {
-    const next = !audioEnabled;
-    setAudioEnabled(next);
-    setSpeechEnabled(next);
-  };
 
   const handleLogin = (loggedStudent: StudentProfile) => {
     setStudent(loggedStudent);
@@ -130,8 +122,6 @@ export default function App() {
         }}
         student={student}
         onLogoutStudent={handleLogout}
-        audioEnabled={audioEnabled}
-        onToggleAudio={handleToggleAudio}
         activeExerciseTitle={activeExercise ? activeExercise.title : undefined}
       />
 

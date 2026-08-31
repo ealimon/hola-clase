@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Exercise, StudentProfile, SpanishLevel } from '../types';
 import { CURRICULUM_EXERCISES } from '../data/curriculum';
-import { BookOpen, Clock, Award, Play, Filter, Sparkles, CheckCircle, Volume2, Search, Zap } from 'lucide-react';
+import { BookOpen, Clock, Award, Play, Filter, Sparkles, CheckCircle, Search, Zap } from 'lucide-react';
 import { StudentAvatar } from './StudentAvatar';
 
 interface StudentExerciseHubProps {
