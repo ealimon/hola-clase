@@ -138,18 +138,19 @@ export const StudentExerciseHub: React.FC<StudentExerciseHubProps> = ({
       </div>
 
       {/* Category Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+      <div className="flex items-center gap-2 overflow-x-auto py-1 px-1 -mx-1 scrollbar-none">
         {categories.map((cat) => (
           <button
             key={cat}
+            id={`filter-category-${cat.toLowerCase()}-btn`}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all border-2 border-black cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all border-2 border-black cursor-pointer ${
               selectedCategory === cat
                 ? 'bg-[#FFCC00] text-black shadow-[3px_3px_0px_#000] -translate-y-0.5'
                 : 'bg-white text-slate-800 shadow-[2px_2px_0px_#000] hover:bg-[#FAF9F6]'
             }`}
           >
-            {cat === 'all' ? '✨ Todas las Categorías' : cat}
+            {cat === 'all' ? 'Todas' : cat}
           </button>
         ))}
       </div>
