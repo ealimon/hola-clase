@@ -1,0 +1,6 @@
+{
+  "name": "¡HolaClase! Spanish Practice & Time Tracker",
+  "description": "Interactive Spanish learning platform for Mrs. Limon's classes with student ID login, immediate feedback, native audio pronunciation, and active-time tracking with anti-cheating analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
