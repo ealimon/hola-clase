@@ -120,7 +120,7 @@ export const StudentExerciseHub: React.FC<StudentExerciseHubProps> = ({
             { id: 'all', label: 'Todos' },
             { id: 'spanish 1', label: 'Spanish 1' },
             { id: 'spanish 2', label: 'Spanish 2' },
-            { id: 'spanish 3', label: 'Spanish 3 / AP' },
+            { id: 'spanish 3', label: 'Spanish 3' },
           ].map((lvl) => (
             <button
               key={lvl.id}

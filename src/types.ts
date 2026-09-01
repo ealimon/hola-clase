@@ -1,6 +1,10 @@
 export type UserRole = 'student' | 'teacher';
 
-export type SpanishLevel = 'Spanish 1 (Beginner)' | 'Spanish 2 (Intermediate)' | 'Spanish 3 / AP (Advanced)';
+export type SpanishLevel = 
+  | 'Spanish 1 (Beginner)' 
+  | 'Spanish 2 (Intermediate)' 
+  | 'Spanish 3 (Advanced)'
+  | 'Spanish 3 / AP (Advanced)';
 
 export type QuestionType = 
   | 'multiple_choice'

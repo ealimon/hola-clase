@@ -14,7 +14,7 @@ export default function App() {
   const [student, setStudent] = useState<StudentProfile | null>(DEMO_STUDENTS[0]); // default to demo student for instant access
   const [activeExercise, setActiveExercise] = useState<Exercise | null>(null);
   const [latestSubmission, setLatestSubmission] = useState<SubmissionRecord | null>(null);
-  const [completedExerciseIds, setCompletedExerciseIds] = useState<string[]>(['ex-ser-estar']);
+  const [completedExerciseIds, setCompletedExerciseIds] = useState<string[]>(['sp1-u2-ser-estar']);
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>(INITIAL_SUBMISSIONS);
   const [customExercises, setCustomExercises] = useState<Exercise[]>([]);
 
