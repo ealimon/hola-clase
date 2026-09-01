@@ -18,23 +18,19 @@ export const StudentExerciseHub: React.FC<StudentExerciseHubProps> = ({
   onStartExercise,
 }) => {
   const [selectedLevel, setSelectedLevel] = useState<string>('all');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   const allExercises: Exercise[] = [...CURRICULUM_EXERCISES, ...customExercises];
 
   const filteredExercises = allExercises.filter((ex) => {
     const matchesLevel = selectedLevel === 'all' || ex.level.toLowerCase().includes(selectedLevel.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || ex.category === selectedCategory;
     const matchesSearch =
       searchQuery === '' ||
       ex.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       ex.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       ex.unit.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesLevel && matchesCategory && matchesSearch;
+    return matchesLevel && matchesSearch;
   });
-
-  const categories = ['all', 'Grammar', 'Vocabulary', 'Listening', 'Reading', 'Culture'];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
@@ -135,24 +131,6 @@ export const StudentExerciseHub: React.FC<StudentExerciseHubProps> = ({
             </button>
           ))}
         </div>
-      </div>
-
-      {/* Category Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto py-1 px-1 -mx-1 scrollbar-none">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            id={`filter-category-${cat.toLowerCase()}-btn`}
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all border-2 border-black cursor-pointer ${
-              selectedCategory === cat
-                ? 'bg-[#FFCC00] text-black shadow-[3px_3px_0px_#000] -translate-y-0.5'
-                : 'bg-white text-slate-800 shadow-[2px_2px_0px_#000] hover:bg-[#FAF9F6]'
-            }`}
-          >
-            {cat === 'all' ? 'Todas' : cat}
-          </button>
-        ))}
       </div>
 
       {/* Exercise Cards Grid */}
